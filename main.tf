@@ -6,7 +6,7 @@ terraform {
   backend "s3" {
     bucket         = "github-actions-1-1" # Replace with your S3 bucket name
     key            = "terraform/ec2-instance.tfstate" # Replace with your desired state file path
-    region         = "us-east-1" # Replace with your bucket's regionn
+    region         = "us-east-1" # Replace with your bucket's region
    
   }
 }
