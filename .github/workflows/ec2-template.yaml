@@ -1,4 +1,4 @@
-name: Manage EC2 Instance with Terraform
+name: Destroy the Infrastructure
 
 on:
   workflow_dispatch:
