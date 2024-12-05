@@ -2,6 +2,7 @@ pipeline {
     agent any  // Run the pipeline on any available Jenkins agent
     
     environment {
+        GITHUB_TOKEN = credentials('github-token')
         // Set environment variables for AWS credentials
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')  // Jenkins credential for AWS Access Key
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')  // Jenkins credential for AWS Secret Key
