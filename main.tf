@@ -7,14 +7,10 @@ terraform {
   }
 }
 
-variable "REPO_TOKEN" {
-  description = "REPO Token"
-  type        = string
-}
 
 
 module "ec2_instance" {
-  source = "git::https://github.com/lutfar1996/terraform-ec2-module.git//terraform-ec2-module?ref=main"
+  source = "git::https://github.com/lutfar1996/Terraform-module.git//terraform-ec2-module?ref=main"
   instance_type = "t2.micro"
   region        = "us-east-1"
   instance_name = "app-server"
