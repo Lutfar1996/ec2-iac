@@ -7,8 +7,14 @@ terraform {
   }
 }
 
-resource "aws_instance" "example" {
-  ami           = "ami-0866a3c8686eaeeba" # Replace with your desired AMI
+variable "REPO_TOKEN" {
+  description = "REPO Token"
+  type        = string
+}
+
+
+module "ec2_instance" {
+  source        = "git::https://${var.REPO_TOKEN}@github.com/lutfar1996/terraform-ec2-module.git//terraform-ec2-module?ref=main"
   instance_type = "t2.micro"
   region        = "us-east-1"
   instance_name = "app-server"
