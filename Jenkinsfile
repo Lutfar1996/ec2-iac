@@ -19,7 +19,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    sh 'sudo apt install python3-pip'  // Install pip if not already installed
+                    sh 'apt install python3-pip'  // Install pip if not already installed
                     sh 'pip install -r requirements.txt'  // Install dependencies
                    
                 }
