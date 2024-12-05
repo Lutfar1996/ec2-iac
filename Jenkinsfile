@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Install the required Python dependencies
-                    sh 'apt install python3-boto3 '
+                    sh 'sudo apt install python3-boto3 -y '
                    
                 }
             }
