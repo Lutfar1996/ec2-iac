@@ -2,16 +2,16 @@ pipeline {
     agent any  // Run the pipeline on any available Jenkins agent
     
     environment {
-        // Set environment variables, including GitHub credentials and AWS credentials
+        // Set environment variables for AWS credentials
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')  // Jenkins credential for AWS Access Key
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')  // Jenkins credential for AWS Secret Key
-        // GITHUB_CREDENTIALS = credentials('github-credentials')  // If using GitHub credentials (username/password or token)
     }
 
-     stage('Checkout Code') {
+    stages {
+        stage('Checkout Code') {
             steps {
-                // Clone the repository containing your Python script
-                git url: 'https://github.com/your-username/your-repository.git', credentialsId: 'github-credentials'
+                // Clone the public repository containing your Python script
+                git url: 'https://github.com/Lutfar1996/ec2-iac.git'
             }
         }
 
