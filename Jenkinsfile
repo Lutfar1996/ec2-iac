@@ -1,52 +1,48 @@
 pipeline {
-    agent any  // Run the pipeline on any available Jenkins agent
-    
+    agent any
+
     environment {
-        // GITHUB_TOKEN = credentials('github-token')
-        // Set environment variables for AWS credentials
-        AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')  // Jenkins credential for AWS Access Key
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')  // Jenkins credential for AWS Secret Key
+        // AWS Credentials ID from Jenkins credentials store
+        AWS_CREDENTIALS_ID = 'aws-credentials' // Replace with your AWS credentials ID
     }
 
     stages {
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                // Clone the public repository containing your Python script
-               git branch: 'main', url: 'https://github.com/Lutfar1996/ec2-iac.git'
+                git branch: 'main', url: 'https://github.com/Lutfar1996/ec2-iac.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 script {
-                      // Ensure python3-venv is installed
-            sh 'sudo apt update && sudo apt install -y python3.12-venv'
-
-            // Create the virtual environment
-            sh 'python3 -m venv venv'
-
-            // Activate the virtual environment using bash and install requirements
-            sh '''#!/bin/bash
-                source venv/bin/activate
-                pip install -r requirements.txt
-            '''
+                    // Install necessary dependencies, create virtual environment
+                    sh '''#!/bin/bash
+                        sudo apt update && sudo apt install -y python3.12-venv
+                        python3 -m venv venv
+                        source venv/bin/activate
+                        pip install -r requirements.txt
+                    '''
                 }
             }
         }
 
-        stage('Run EC2 Monitor Script') {
+        stage('Run Python Script') {
             steps {
                 script {
-                    // Run the Python script to monitor the EC2 instance and send a message to Discord
-                    sh 'python3 script.py'  // Adjust the command based on the location of your Python script
+                    // Use withCredentials to inject AWS IAM credentials
+                    withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding', 
+                        credentialsId: AWS_CREDENTIALS_ID // AWS credentials ID
+                    ]]) {
+                        // Run your python script with AWS credentials available
+                        sh '''#!/bin/bash
+                            source venv/bin/activate
+                            python3 script.py
+                        '''
+                    }
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            echo "Pipeline finished."
         }
     }
 }
