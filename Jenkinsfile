@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Clone the public repository containing your Python script
-               git credentialsId: 'github-token' git url: 'https://github.com/Lutfar1996/ec2-iac.git'
+               git branch: 'main', url: 'https://github.com/Lutfar1996/ec2-iac.git'
             }
         }
 
