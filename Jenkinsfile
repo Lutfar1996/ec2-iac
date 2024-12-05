@@ -16,14 +16,15 @@ pipeline {
             }
         }
 
-        // stage('Install Dependencies') {
-        //     steps {
-        //         script {
-        //             // Install the required Python dependencies
-        //             sh 'pip install boto3 requests'
-        //         }
-        //     }
-        // }
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Install the required Python dependencies
+                    sh 'pip install python3-boto3 ',
+                    sh 'pip install python3-requests'
+                }
+            }
+        }
 
         stage('Run EC2 Monitor Script') {
             steps {
