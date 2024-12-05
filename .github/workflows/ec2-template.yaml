@@ -37,8 +37,12 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
 
       - name: Terraform Apply or Destroy
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
         run: |
           if [[ "${{ github.event.inputs.action }}" == "apply" ]]; then
             terraform plan -out=tfplan
