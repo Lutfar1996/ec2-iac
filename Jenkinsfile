@@ -19,9 +19,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    sh 'sudo apt install python3-pip'  // Install pip if not already installed
-                    sh 'pip install -r requirements.txt'  // Install dependencies
-                   
+                    sh 'python3 -m venv venv'
+                    sh 'source venv/bin/activate && pip install -r requirements.txt'
                 }
             }
         }
