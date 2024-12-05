@@ -19,8 +19,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install the required Python dependencies
-                    sh 'sudo apt install python3-boto3 -y '
+                    sh 'sudo apt install python3-pip'  // Install pip if not already installed
+                    sh 'pip install -r requirements.txt'  // Install dependencies
                    
                 }
             }
