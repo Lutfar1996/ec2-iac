@@ -8,7 +8,7 @@ terraform {
 }
 
 module "ec2_instance" {
-  source        = "git::https://github.com/your-org/terraform-ec2-module.git"
+  source        = "git::https://github.com/your-org/terraform-ec2-module.git//terraform-ec2-module?ref=main"
   instance_type = "t2.micro"
   region        = "us-east-1"
   instance_name = "app-server"
