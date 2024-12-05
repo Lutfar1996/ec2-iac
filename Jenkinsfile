@@ -8,11 +8,10 @@ pipeline {
         // GITHUB_CREDENTIALS = credentials('github-credentials')  // If using GitHub credentials (username/password or token)
     }
 
-    stages {
-        stage('Checkout Code') {
+     stage('Checkout Code') {
             steps {
                 // Clone the repository containing your Python script
-                git url: 'https://github.com/Lutfar1996/ec2-iac.git'
+                git url: 'https://github.com/your-username/your-repository.git', credentialsId: 'github-credentials'
             }
         }
 
