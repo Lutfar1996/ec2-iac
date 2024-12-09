@@ -14,5 +14,7 @@ module "ec2_instance" {
   instance_type = "t2.micro"
   region        = "us-east-1"
   instance_name = "app-server"
-  environment   = "production"
+  environment   = "Jenkins"
+   # Add user_data directly
+  user_data     = file("script.sh")
 }
