@@ -16,5 +16,5 @@ module "ec2_instance" {
   instance_name = "app-server"
   environment   = "Jenkins"
    # Add user_data directly
-  user_data     = file("script.sh")
+ 
 }
